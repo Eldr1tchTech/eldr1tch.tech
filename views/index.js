@@ -46,39 +46,28 @@ const createHomePageTemplate = () => /* html */`
                 <h1>Welcome to Eldr1tch.tech</h1>
             </main>
             
-            <!-- Popup/Modal -->
-            <div id="qPopup" class="popup">
-                <div class="popup-content">
-                    <span class="close-btn" onclick="closePopup()">&times;</span>
-                    <h2>Quick Search</h2>
-                    <p>This is your popup that appears when the 'q' key is pressed.</p>
-                    <!-- Add your content here -->
-                </div>
-            </div>
+            <div id="popup-container"></div>
             
             <script>
-                // Function to open the popup
-                function openPopup() {
-                    document.getElementById('qPopup').style.display = 'flex';
-                }
-                
-                // Function to close the popup
-                function closePopup() {
-                    document.getElementById('qPopup').style.display = 'none';
-                }
-                
-                // Event listener for keyboard events
                 document.addEventListener('keydown', function(event) {
-                    // Check if the pressed key is 'q' (keyCode 81)
-                    if (event.key === 'q' || event.key === 'Q') {
-                        openPopup();
+                    if (event.key === '\`' || event.key === '~') {
+                        htmx.ajax('GET', '/navigationoverlay', {target:'#popup-container', swap:'innerHTML'});
+                        setTimeout(() => {
+                            const popup = document.querySelector('.popup');
+                            if (popup) popup.style.display = 'flex';
+                        }, 100);
                     }
                     
-                    // Close popup when Escape key is pressed
                     if (event.key === 'Escape') {
-                        closePopup();
+                        const popup = document.querySelector('.popup');
+                        if (popup) popup.style.display = 'none';
                     }
                 });
+                
+                function closePopup() {
+                    const popup = document.querySelector('.popup');
+                    if (popup) popup.style.display = 'none';
+                }
             </script>
         </body>
     </html>

@@ -1,6 +1,8 @@
-const BOOKS_DATA = [
-  {id: "1", title: 'The Final Empire', author: 'Brandon Sanderson'},
-  {id: '2', title: 'The Way of Kings', author: 'Brandon Sanderson'},
+const SERVICES_DATA = [
+  {name: "Portfolio", path: "/portfolio", image: "/assets/images/portfolio.png"},
+  {name: "Horizon OS", path: "/horizonos", image: "/assets/images/horizon_os.png"},
+  {name: "Aurorae Engine", path: "/aurorae", image: "/assets/images/aurorae_engine.png"},
+  {name: "Voyageurs", path: "/voyageurs", image: "/assets/images/voyageurs.png"},
 ];
 
-export default BOOKS_DATA;
+export default SERVICES_DATA;
