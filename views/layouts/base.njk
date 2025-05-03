@@ -1,0 +1,19 @@
+{# views/layouts/base.njk #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Home{% endblock %} - Eldr1tch.tech</title>
+        <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/styles/main.css">
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        {% include "partials/header.njk" %}
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

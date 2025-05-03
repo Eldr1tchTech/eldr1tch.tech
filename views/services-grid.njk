@@ -1,0 +1,9 @@
+{# views/services-grid.njk #}
+<div class="services-grid">
+    {% for service in services %}
+    <div class="service-card-container"
+         hx-get="/service-card/{{ service.path | replace('/', '') }}" 
+         hx-trigger="load">
+    </div>
+    {% endfor %}
+</div>
