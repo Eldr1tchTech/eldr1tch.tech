@@ -22,9 +22,8 @@ app.get('/', (req, res) => {
   res.render('index.njk', { services: SERVICES_DATA });
 });
 
-// Quick search popup
-app.get('/quick-search', (req, res) => {
-  res.render('quick-search-popup.njk', { services: SERVICES_DATA });
+app.get('/navigation', (req, res) => {
+  res.render('navigation-popup.njk', { services: SERVICES_DATA });
 });
 
 // Search services based on query

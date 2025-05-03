@@ -8,11 +8,48 @@
         {% block head %}{% endblock %}
     </head>
     <body>
-        {% include "partials/header.njk" %}
 
         <main>
             {% block content %}{% endblock %}
         </main>
+        
+        <!-- Popup placeholder - available on all pages -->
+        <div id="popup-container"></div>
+        
+        <!-- Navigation popup scripts - available on all pages -->
+        <script>
+            // Event listener for keyboard events
+            document.addEventListener('keydown', function(event) {
+                // Check if the pressed key is '/' or '~'
+                if (event.key === '\`' || event.key === '~') {
+                    
+                    // Trigger HTMX request to load the popup
+                    htmx.ajax('GET', '/navigation', {target:'#popup-container', swap:'innerHTML'});
+                    // Show the popup after it's loaded
+                    setTimeout(() => {
+                        const popup = document.querySelector('.popup');
+                        if (popup) {
+                            popup.style.display = 'flex';
+                            // Focus on the search input if it exists
+                            const searchInput = popup.querySelector('input[type="text"]');
+                            if (searchInput) searchInput.focus();
+                        }
+                    }, 100);
+                }
+                
+                // Close popup when Escape key is pressed
+                if (event.key === 'Escape') {
+                    const popup = document.querySelector('.popup');
+                    if (popup) popup.style.display = 'none';
+                }
+            });
+            
+            // Function to handle popup closing (will be called from the loaded popup)
+            function closePopup() {
+                const popup = document.querySelector('.popup');
+                if (popup) popup.style.display = 'none';
+            }
+        </script>
         
         {% block scripts %}{% endblock %}
     </body>
